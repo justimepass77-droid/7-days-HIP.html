@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7-Day Reset Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAF8F4;
+    --ink: #1A1410;
+    --charcoal: #2D2520;
+    --rust: #B85C38;
+    --terracotta: #C4714A;
+    --sage: #7A8C6E;
+    --dusty-rose: #C49A8A;
+    --muted-gold: #C9A84C;
+    --light-sage: #E8EDE4;
+    --light-rose: #F2E8E4;
+    --border: #D4C8BA;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: var(--rust);
+    opacity: 0.15;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -30px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: var(--muted-gold);
+    opacity: 0.1;
+  }
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.75rem;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+  header h1 em {
+    font-style: italic;
+    color: var(--dusty-rose);
+  }
+  .header-sub {
+    font-size: 0.85rem;
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+    max-width: 420px;
+    margin: 0.75rem auto 0;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 1rem 0.9rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    opacity: 0.5;
+  }
+  .nav-btn:hover { opacity: 0.8; }
+  .nav-btn.active {
+    border-bottom-color: var(--rust);
+    color: var(--rust);
+    opacity: 1;
+  }
+  .nav-btn.extra {
+    color: var(--sage);
+  }
+  .nav-btn.extra.active {
+    border-bottom-color: var(--sage);
+    color: var(--sage);
+  }
+
+  /* MAIN */
+  main { max-width: 860px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+  /* PANELS */
+  .panel { display: none; animation: fadeIn 0.3s ease; }
+  .panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  /* DAY CARD */
+  .day-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  .day-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--rust);
+  }
+  .day-meta { flex: 1; }
+  .day-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .day-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-top: 0.2rem;
+  }
+
+  /* SECTIONS */
+  .section {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1.2rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .section-header:hover { background: var(--light-rose); }
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .tag-morning { background: #FFF3E0; color: #B45309; }
+  .tag-day { background: var(--light-sage); color: var(--sage); }
+  .tag-evening { background: var(--light-rose); color: #8B4560; }
+  .section-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    flex: 1;
+  }
+  .section-toggle {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--border);
+    transition: transform 0.2s;
+  }
+  .section.open .section-toggle { transform: rotate(180deg); }
+  .section-body {
+    display: none;
+    padding: 0 1.2rem 1.2rem;
+    border-top: 1px solid var(--border);
+  }
+  .section.open .section-body { display: block; }
+
+  /* TASKS */
+  .task-list { list-style: none; margin-top: 0.75rem; }
+  .task-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .task-item:last-child { border-bottom: none; }
+  .task-cb {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--charcoal);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    background: white;
+  }
+  .task-cb:checked {
+    background: var(--rust);
+    border-color: var(--rust);
+  }
+  .task-cb:checked::after {
+    content: '✓';
+    position: absolute;
+    top: -2px; left: 2px;
+    font-size: 12px;
+    color: white;
+    font-weight: bold;
+  }
+  .task-label {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .task-cb:checked + .task-label {
+    opacity: 0.45;
+    text-decoration: line-through;
+    text-decoration-color: var(--rust);
+  }
+  .why-note {
+    margin-top: 0.9rem;
+    padding: 0.75rem 1rem;
+    background: var(--light-sage);
+    border-left: 3px solid var(--sage);
+    border-radius: 0 2px 2px 0;
+    font-size: 0.8rem;
+    color: #4A5C40;
+    line-height: 1.6;
+  }
+  .why-note strong {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+
+  /* PROGRESS BAR */
+  .progress-wrap {
+    margin-bottom: 1.5rem;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1rem 1.2rem;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.5rem;
+  }
+  .progress-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--rust), var(--terracotta));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  /* TRACKER PANEL */
+  .tracker-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .tracker-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1.1rem;
+  }
+  .tracker-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .tracker-day-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--rust);
+  }
+  .tracker-dots {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.6rem;
+  }
+  .tracker-dot {
+    width: 28px; height: 28px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    color: var(--charcoal);
+    opacity: 0.5;
+    background: white;
+  }
+  .tracker-dot.done {
+    background: var(--rust);
+    border-color: var(--rust);
+    color: white;
+    opacity: 1;
+  }
+  .tracker-habit-label {
+    font-size: 0.78rem;
+    color: var(--charcoal);
+    opacity: 0.7;
+  }
+
+  /* WHY IT WORKS PANEL */
+  .why-section {
+    margin-bottom: 2rem;
+  }
+  .why-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .why-section h3 span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--sage);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .why-section p {
+    font-size: 0.87rem;
+    line-height: 1.75;
+    color: var(--charcoal);
+    margin-bottom: 0.5rem;
+  }
+  .principle-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    margin-right: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
+  .pt-cbt { background: #EDE9FE; color: #5B21B6; }
+  .pt-ba { background: #FEF3C7; color: #92400E; }
+  .pt-se { background: var(--light-rose); color: #9D174D; }
+  .pt-at { background: var(--light-sage); color: #065F46; }
+
+  /* RULES */
+  .ground-rules {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 2px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .ground-rules h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--muted-gold);
+  }
+  .ground-rules ol {
+    padding-left: 1.2rem;
+    font-size: 0.85rem;
+    line-height: 2;
+    opacity: 0.85;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .day-number { font-size: 2.2rem; }
+    .day-title { font-size: 1.15rem; }
+    nav { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">Psychology-based · 7 days · No fluff</div>
+  <h1>Your <em>Reset</em><br>Starts Here</h1>
+  <p class="header-sub">A structured 7-day plan built on CBT, behavioral activation, self-efficacy & assertiveness training.</p>
+</header>
+
+<nav id="mainNav">
+  <button class="nav-btn active" data-panel="day1">Day 1</button>
+  <button class="nav-btn" data-panel="day2">Day 2</button>
+  <button class="nav-btn" data-panel="day3">Day 3</button>
+  <button class="nav-btn" data-panel="day4">Day 4</button>
+  <button class="nav-btn" data-panel="day5">Day 5</button>
+  <button class="nav-btn" data-panel="day6">Day 6</button>
+  <button class="nav-btn" data-panel="day7">Day 7</button>
+  <button class="nav-btn extra" data-panel="tracker">Tracker</button>
+  <button class="nav-btn extra" data-panel="why">Why It Works</button>
+</nav>
+
+<main>
+
+<!-- ===================== DAY 1 ===================== -->
+<div class="panel active" id="day1">
+  <div class="day-header">
+    <div class="day-number">01</div>
+    <div class="day-meta">
+      <div class="day-title">Observe, Don't Judge</div>
+      <div class="day-subtitle">Theme: Awareness → CBT Foundation</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Day Progress</span><span class="prog-text-1">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog1" style="width:0%"></div></div>
+  </div>
+
+  <div class="section open">
+    <div class="section-header">
+      <span class="section-tag tag-morning">Morning</span>
+      <span class="section-title">Wake at 8:30 AM (non-negotiable start)</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d1-1"><label class="task-label" for="d1-1">Set one alarm for 8:30 AM tonight. No snooze. Just get vertical.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d1-2"><label class="task-label" for="d1-2">Drink a full glass of water before picking up your phone.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d1-3"><label class="task-label" for="d1-3">Write 3 things in a notebook: How you feel right now (no editing, no judgment). What drained you yesterday. One thing you don't hate about yourself.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Morning journaling activates your prefrontal cortex before emotional reactivity sets in. Writing without censoring is the entry point to CBT self-monitoring.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag tag-day">Daytime</span>
+      <span class="section-title">Thought Record — Catch One Negative Loop</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d1-4"><label class="task-label" for="d1-4">When a negative thought hits, pause. Write it down exactly as it appeared.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d1-5"><label class="task-label" for="d1-5">Ask: "Is this a fact or a feeling?" Write one alternative interpretation.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d1-6"><label class="task-label" for="d1-6">15-minute walk — outside if possible. No music, just notice your surroundings.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d1-7"><label class="task-label" for="d1-7">Eat one proper meal sitting down (not while scrolling).</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> The thought record is the core CBT tool. "Fact vs. feeling" breaks automatic negative thought patterns. The walk without distraction trains present-moment awareness, which reduces overthinking.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag tag-evening">Evening</span>
+      <span class="section-title">First Assertiveness Practice (Low Stakes)</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d1-8"><label class="task-label" for="d1-8">Say one small honest thing today that you'd normally swallow to keep the peace. Could be as simple as "I don't want to watch that" or "I need quiet right now."</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d1-9"><label class="task-label" for="d1-9">Before bed, write: What was hard today? What did you manage to do anyway?</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d1-10"><label class="task-label" for="d1-10">Lights off by midnight. Phone face-down 30 minutes before.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Low-stakes assertiveness practice (not confrontation) trains your nervous system that expressing yourself is safe. The bedtime reflection builds self-efficacy evidence — proof that you can do hard things.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DAY 2 ===================== -->
+<div class="panel" id="day2">
+  <div class="day-header">
+    <div class="day-number">02</div>
+    <div class="day-meta">
+      <div class="day-title">Build Evidence of Competence</div>
+      <div class="day-subtitle">Theme: Self-Efficacy → Small Wins</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Day Progress</span><span class="prog-text-2">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog2" style="width:0%"></div></div>
+  </div>
+
+  <div class="section open">
+    <div class="section-header">
+      <span class="section-tag tag-morning">Morning</span>
+      <span class="section-title">Wake 8:30 AM + One Non-Negotiable Task</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d2-1"><label class="task-label" for="d2-1">Wake at 8:30 AM. Make your bed immediately (2 minutes). This is your first win of the day.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d2-2"><label class="task-label" for="d2-2">Write ONE goal for today — something small and completable by evening.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d2-3"><label class="task-label" for="d2-3">10 minutes: stretch or light yoga. YouTube "10 min morning stretch" — do not overthink which one.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Bandura's self-efficacy research shows small mastery experiences are the most powerful source of confidence. Making your bed and completing a stated goal creates a real evidence base that you follow through.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag tag-day">Daytime</span>
+      <span class="section-title">Behavioral Activation — Do One Thing You've Avoided</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d2-4"><label class="task-label" for="d2-4">Identify one task you've been avoiding (a text to reply, a chore, something for yourself). Do just the first step of it today.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d2-5"><label class="task-label" for="d2-5">CBT exercise: Write down one belief you have about yourself (e.g. "I'm not good enough"). Now list 3 real-life pieces of evidence that contradict it.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d2-6"><label class="task-label" for="d2-6">Eat two proper meals today. No restriction, no excess — just structured.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Behavioral Activation directly targets the avoidance cycle that feeds low mood. Taking action even in small doses breaks the waiting-to-feel-motivated trap. Evidence logging challenges cognitive distortions about self-worth.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag tag-evening">Evening</span>
+      <span class="section-title">Boundaries Practice: "No" Without Apology</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d2-7"><label class="task-label" for="d2-7">Decline or redirect one request today without over-explaining. Try: "I can't do that right now" — full stop.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d2-8"><label class="task-label" for="d2-8">30-minute evening walk or 20-minute free movement (dance, stretch, anything that moves your body with zero performance pressure).</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d2-9"><label class="task-label" for="d2-9">Journal: Did completing today's goal feel different than you expected? What happened when you said no?</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> "No" without justification is one of the most direct assertiveness tools. The urge to over-explain comes from a belief that your needs require approval. You're training a new response pattern.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DAY 3 ===================== -->
+<div class="panel" id="day3">
+  <div class="day-header">
+    <div class="day-number">03</div>
+    <div class="day-meta">
+      <div class="day-title">Name What You Actually Feel</div>
+      <div class="day-subtitle">Theme: Emotional Identification → Break Suppression</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Day Progress</span><span class="prog-text-3">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog3" style="width:0%"></div></div>
+  </div>
+
+  <div class="section open">
+    <div class="section-header">
+      <span class="section-tag tag-morning">Morning</span>
+      <span class="section-title">Emotion Check-In (Not "I'm Fine")</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d3-1"><label class="task-label" for="d3-1">Wake 8:30 AM. Before you speak to anyone, write 3 emotion words that describe how you actually feel right now. (Not "fine," "okay," or "tired.")</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d3-2"><label class="task-label" for="d3-2">Write: "I feel ___ because ___. What I actually need is ___." Fill it in honestly.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d3-3"><label class="task-label" for="d3-3">20-minute walk or body movement session. This is non-negotiable physical output today.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Emotional suppression in families often means learning to misname or dismiss feelings. Emotional labeling (affect labeling) reduces amygdala reactivity — naming a feeling literally calms your brain's threat response.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag tag-day">Daytime</span>
+      <span class="section-title">Letter to Yourself (Unsent)</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d3-4"><label class="task-label" for="d3-4">Write a letter to the version of yourself who is the most suppressed — the one who stays quiet, shrinks, keeps peace. Tell her what you see. Don't perform. Don't write what sounds good. Be honest.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d3-5"><label class="task-label" for="d3-5">Identify one family dynamic that costs you something (peace, voice, energy). Just name it in writing. You don't have to act on it yet.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d3-6"><label class="task-label" for="d3-6">Eat lunch away from your usual spot (outside, different room). Change your environment even slightly.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Compassionate self-address externalizes the internal critic without toxic positivity. Naming family dynamics creates psychological distance — a cognitive tool for separating "their narrative" from your identity.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag tag-evening">Evening</span>
+      <span class="section-title">Voice Practice: State One Need Directly</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d3-7"><label class="task-label" for="d3-7">State one need clearly to someone today. Use the format: "I need ___." Not "sorry but could you maybe…" — just the need.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d3-8"><label class="task-label" for="d3-8">If stating the need out loud feels impossible, write it in a message — even send it to yourself.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d3-9"><label class="task-label" for="d3-9">Before bed: What emotion were you most afraid to feel today? Write one line about it.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> "I need" statements are a core assertiveness skill. For people with emotional suppression, needs become invisible even to themselves. Saying it — even in writing — is a neurological rehearsal for real expression.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DAY 4 ===================== -->
+<div class="panel" id="day4">
+  <div class="day-header">
+    <div class="day-number">04</div>
+    <div class="day-meta">
+      <div class="day-title">Interrupt the Self-Sabotage Loop</div>
+      <div class="day-subtitle">Theme: Pattern Recognition → Behavioral Change</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Day Progress</span><span class="prog-text-4">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog4" style="width:0%"></div></div>
+  </div>
+
+  <div class="section open">
+    <div class="section-header">
+      <span class="section-tag tag-morning">Morning</span>
+      <span class="section-title">Map Your Self-Sabotage Pattern</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d4-1"><label class="task-label" for="d4-1">Wake 8:30 AM. Write: "The thing I most want but keep stopping myself from having is ___."</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d4-2"><label class="task-label" for="d4-2">Then write: "When I get close to it, I usually ___." (e.g. distract myself, pick a fight, procrastinate, convince myself I don't really want it).</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d4-3"><label class="task-label" for="d4-3">Identify the fear underneath: "If I actually had that, I'm afraid ___."</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Self-sabotage is almost always a fear-based protection mechanism. Identifying the structure of the pattern (trigger → behavior → underlying fear) is the CBT A-B-C model applied to your own cycle.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag tag-day">Daytime</span>
+      <span class="section-title">Do The Thing You Keep Delaying</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d4-4"><label class="task-label" for="d4-4">Choose one thing you've been sabotaging (applying for something, reaching out, starting something creative, anything). Do just the first step — send the email, open the document, make the call.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d4-5"><label class="task-label" for="d4-5">25-minute brisk walk. Put on something that makes you feel like yourself (a playlist, a podcast). This is mood-regulation through movement.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d4-6"><label class="task-label" for="d4-6">Three structured meals today. Eat without your phone at least once.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Behavioral activation directly breaks avoidance. The first step is the hardest — activation energy drops sharply once you begin. Completing even one step rewires the "I always stop myself" narrative.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag tag-evening">Evening</span>
+      <span class="section-title">Replace the Sabotage Response</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d4-7"><label class="task-label" for="d4-7">Write a short "if-then" plan: "If I feel the urge to [sabotage behavior], then I will [different small action] instead."</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d4-8"><label class="task-label" for="d4-8">Spend 15 minutes on something purely for yourself — something that has no productivity value and no audience. Read, draw, sit in silence, whatever.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d4-9"><label class="task-label" for="d4-9">Lights out by midnight.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Implementation intentions ("if-then" plans) increase follow-through by up to 300% in psychological research. They work because they pre-decide the response before the emotional trigger hits.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DAY 5 ===================== -->
+<div class="panel" id="day5">
+  <div class="day-header">
+    <div class="day-number">05</div>
+    <div class="day-meta">
+      <div class="day-title">Build Your Body Back Into the Picture</div>
+      <div class="day-subtitle">Theme: Physical Activation → Self-Respect in Motion</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Day Progress</span><span class="prog-text-5">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog5" style="width:0%"></div></div>
+  </div>
+
+  <div class="section open">
+    <div class="section-header">
+      <span class="section-tag tag-morning">Morning</span>
+      <span class="section-title">Movement First, Everything Else Second</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d5-1"><label class="task-label" for="d5-1">Wake 8:30 AM. Before breakfast, do 15 minutes of movement: walk, stretching, or a short YouTube workout. Not for aesthetics — for your nervous system.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d5-2"><label class="task-label" for="d5-2">Write one thing your body allowed you to do this week that you didn't thank it for.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d5-3"><label class="task-label" for="d5-3">Eat breakfast within one hour of waking.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Exercise is one of the most evidence-backed interventions for low self-esteem and anxiety. Even 15 minutes increases BDNF (brain growth factor) and shifts your body's stress response. Framing it as nervous system care removes performance pressure.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag tag-day">Daytime</span>
+      <span class="section-title">Values Inventory — What Actually Matters to You</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d5-4"><label class="task-label" for="d5-4">Write the answer to: "If no one was watching and no one had expectations of me, I would spend my time ___."</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d5-5"><label class="task-label" for="d5-5">Write 3 values you actually hold (not ones you've been told to hold). Examples: honesty, creativity, freedom, depth, quiet, ambition — use your own words.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d5-6"><label class="task-label" for="d5-6">Circle one value that is most violated in your daily life right now. Note where and by what.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> People without clear goals often have goals — they've just adopted other people's. Values clarification (from ACT therapy) separates your actual direction from inherited ones, which is the first step toward goals that feel real.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag tag-evening">Evening</span>
+      <span class="section-title">Confidence Anchor: Evidence of Strength</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d5-7"><label class="task-label" for="d5-7">Write 5 real things you have done, survived, or navigated that required courage or skill. Not achievements. Evidence of resilience.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d5-8"><label class="task-label" for="d5-8">Read them out loud to yourself. (Yes, actually out loud. This is the uncomfortable part that works.)</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d5-9"><label class="task-label" for="d5-9">One assertiveness action: In an interaction today, maintain eye contact and don't fill silence with apology. Let the silence exist.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Reading your own evidence of strength aloud engages multiple sensory channels and forces ownership. Most people can intellectually acknowledge their strengths but never internalize them — vocalization changes that.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DAY 6 ===================== -->
+<div class="panel" id="day6">
+  <div class="day-header">
+    <div class="day-number">06</div>
+    <div class="day-meta">
+      <div class="day-title">Hold the Line</div>
+      <div class="day-subtitle">Theme: Assertiveness Under Pressure</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Day Progress</span><span class="prog-text-6">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog6" style="width:0%"></div></div>
+  </div>
+
+  <div class="section open">
+    <div class="section-header">
+      <span class="section-tag tag-morning">Morning</span>
+      <span class="section-title">Intention Setting — Not Motivation, Direction</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d6-1"><label class="task-label" for="d6-1">Wake 8:30 AM. Write: "Today I will not shrink when ___." Fill in the specific situation you're anticipating.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d6-2"><label class="task-label" for="d6-2">20 minutes of movement. You've done this 5 days. It's becoming a pattern now.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d6-3"><label class="task-label" for="d6-3">Identify: What is one expectation your family has of you that you've never actually agreed to?</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Anticipatory assertiveness (naming the situation in advance) primes your brain to respond rather than react. You're setting a behavioral intention before the emotional pull hits.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag tag-day">Daytime</span>
+      <span class="section-title">The Broken Record Technique</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d6-4"><label class="task-label" for="d6-4">Practice this technique: When pushed on something you've said no to, calmly repeat your position without escalating. "I understand, and my answer is still no." Rehearse it in your head or write it out for your specific situation.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d6-5"><label class="task-label" for="d6-5">CBT check: Notice if you feel guilty for holding a boundary. Write: "I feel guilty because I believe ___." Then ask: "Is this belief mine, or was it installed?"</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d6-6"><label class="task-label" for="d6-6">Three structured meals. Sit down for at least two of them.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> The Broken Record technique from assertiveness training prevents you from getting pulled into justifying your own needs. Guilt for having boundaries is learned — questioning its origin is the start of unlearning it.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag tag-evening">Evening</span>
+      <span class="section-title">A Decision Made For You, Not For Peace</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d6-7"><label class="task-label" for="d6-7">Make one decision today entirely based on what YOU want — not what keeps the peace, avoids conflict, or makes someone else comfortable. Small or large.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d6-8"><label class="task-label" for="d6-8">Notice how your body responds. Write one sentence about it.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d6-9"><label class="task-label" for="d6-9">Reward: Spend your evening doing exactly what you feel like — no productivity guilt.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Fawning (doing things for peace rather than choice) is a stress response, not a personality trait. Making autonomous decisions — and noticing you survive them — is how you rebuild trust in your own judgment.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DAY 7 ===================== -->
+<div class="panel" id="day7">
+  <div class="day-header">
+    <div class="day-number">07</div>
+    <div class="day-meta">
+      <div class="day-title">Take Stock. Don't Reset. Continue.</div>
+      <div class="day-subtitle">Theme: Consolidation → Building Forward</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Day Progress</span><span class="prog-text-7">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog7" style="width:0%"></div></div>
+  </div>
+
+  <div class="section open">
+    <div class="section-header">
+      <span class="section-tag tag-morning">Morning</span>
+      <span class="section-title">Review Without Judgment</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d7-1"><label class="task-label" for="d7-1">Wake 8:30 AM. You've done this 7 days. Your sleep pattern has shifted — acknowledge that.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d7-2"><label class="task-label" for="d7-2">Write: What was hardest this week? What surprised you? What did you actually do that you didn't think you would?</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d7-3"><label class="task-label" for="d7-3">20 minutes of movement. Make it one you've come to like this week.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Consolidation reflection activates memory encoding — you're literally teaching your brain that this week happened, that you did it, and that it counts. This is how habits get anchored.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag tag-day">Daytime</span>
+      <span class="section-title">Design Week 2 — One Change at a Time</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d7-4"><label class="task-label" for="d7-4">Write: What is the ONE habit from this week you want to continue no matter what?</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d7-5"><label class="task-label" for="d7-5">Write a 3-sentence honest statement about who you are starting to understand yourself to be — separate from your family's version of you.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d7-6"><label class="task-label" for="d7-6">Eat three meals today. You've practiced this. Keep it.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Choosing one habit to continue prevents overwhelm-collapse (the all-or-nothing thinking that kills most self-improvement attempts). Identity statement writing is a CBT technique for building a stable self-concept separate from external validation.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag tag-evening">Evening</span>
+      <span class="section-title">Final Assertiveness Act: One Honest Conversation</span>
+      <span class="section-toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="task-list">
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d7-7"><label class="task-label" for="d7-7">Have one honest conversation today where you say something real — to a family member, friend, or yourself in writing. Not a confrontation. Just truth.</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d7-8"><label class="task-label" for="d7-8">Write your letter to next week's version of yourself. What does she need to hear? What are you handing her?</label></li>
+        <li class="task-item"><input type="checkbox" class="task-cb" id="d7-9"><label class="task-label" for="d7-9">Tonight: no scrolling after 11 PM. Sleep before midnight. You've reset your rhythm. Don't undo it.</label></li>
+      </ul>
+      <div class="why-note"><strong>Why:</strong> Ending with an honest act seals the week with agency, not compliance. Writing to your future self creates psychological continuity — you're not starting over, you're building on what just happened.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== TRACKER ===================== -->
+<div class="panel" id="tracker">
+  <div class="day-header">
+    <div class="day-number" style="color:var(--sage)">✓</div>
+    <div class="day-meta">
+      <div class="day-title">Weekly Habit Tracker</div>
+      <div class="day-subtitle">Tap a day dot to mark completion</div>
+    </div>
+  </div>
+
+  <div class="ground-rules">
+    <h3>Ground Rules for This Week</h3>
+    <ol>
+      <li>Wake time: 8:30 AM every day — no exceptions, no negotiation with yourself</li>
+      <li>One honest emotion named per day — not "fine," not "okay"</li>
+      <li>One assertiveness act per day — small is fine, consistent is everything</li>
+      <li>Movement every day — 15 to 30 minutes, no performance pressure</li>
+      <li>No phone for 30 minutes before sleep</li>
+      <li>You are allowed to do this imperfectly — skipping half a day is not starting over</li>
+      <li>This plan is for you. Not for anyone watching.</li>
+    </ol>
+  </div>
+
+  <div class="tracker-grid" id="trackerGrid"></div>
+</div>
+
+<!-- ===================== WHY IT WORKS ===================== -->
+<div class="panel" id="why">
+  <div class="day-header">
+    <div class="day-number" style="color:var(--muted-gold); font-size:2rem;">Ψ</div>
+    <div class="day-meta">
+      <div class="day-title">Why This Plan Works</div>
+      <div class="day-subtitle">The psychological reasoning</div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <h3>Sleep Schedule First <span>Circadian & Activation</span></h3>
+    <span class="principle-tag pt-ba">Behavioral Activation</span>
+    <p>Irregular sleep destroys mood regulation, executive function, and motivation before the day even begins. 8:30 AM is achievable without being punishing. A fixed wake time (not bedtime) is the fastest way to reset your circadian rhythm in 7 days. You don't need to force sleep — you need to force the morning.</p>
+  </div>
+
+  <div class="why-section">
+    <h3>CBT Thought Records <span>Cognitive Restructuring</span></h3>
+    <span class="principle-tag pt-cbt">CBT</span>
+    <p>Overthinking and unnecessary stress are almost always driven by automatic negative thoughts — thoughts the brain runs on autopilot. CBT thought records interrupt this automation by making the thought visible. "Fact or feeling?" is one of the most effective single questions you can train yourself to ask. It doesn't eliminate the thought; it creates enough distance to respond instead of react.</p>
+  </div>
+
+  <div class="why-section">
+    <h3>Behavioral Activation <span>Action Before Motivation</span></h3>
+    <span class="principle-tag pt-ba">Behavioral Activation</span>
+    <p>Low confidence and low mood create a waiting trap — you wait to feel motivated before acting. Behavioral Activation (from depression treatment research) reverses this: action comes first, mood follows. This plan front-loads small actions because the research is clear — you will not feel ready before you start. The readiness comes after.</p>
+  </div>
+
+  <div class="why-section">
+    <h3>Self-Efficacy Building <span>Bandura's Mastery Experiences</span></h3>
+    <span class="principle-tag pt-se">Self-Efficacy</span>
+    <p>Confidence isn't built by thinking more positively. It's built by doing things and surviving them. Albert Bandura's research identifies "mastery experiences" — small, real completions — as the primary source of self-efficacy. Every checkbox you tick is neurological evidence against the story that you can't follow through. The plan is structured to give you daily proof, not inspiration.</p>
+  </div>
+
+  <div class="why-section">
+    <h3>Assertiveness Training <span>Graduated Exposure</span></h3>
+    <span class="principle-tag pt-at">Assertiveness</span>
+    <p>Assertiveness is a skill, not a personality trait. This plan uses graduated exposure — starting with low-stakes "I don't want to" statements and building toward maintaining positions under pressure. For people in emotionally suppressive environments, assertiveness practice must be gradual because the nervous system has learned that self-expression = danger. You're teaching it otherwise, one small act at a time.</p>
+  </div>
+
+  <div class="why-section">
+    <h3>Emotional Labeling <span>Affect Labeling Research</span></h3>
+    <span class="principle-tag pt-cbt">CBT</span>
+    <p>Naming emotions precisely — not "bad" or "stressed" but "resentful," "suffocated," "overlooked" — activates the prefrontal cortex and reduces amygdala reactivity. UCLA research by Matthew Lieberman showed that affect labeling produces measurable reductions in emotional intensity. For people who suppress emotions in family systems, this is the first step: knowing what you're actually feeling before deciding what to do about it.</p>
+  </div>
+
+  <div class="why-section">
+    <h3>Physical Movement <span>Mood Regulation & Self-Respect</span></h3>
+    <span class="principle-tag pt-ba">Behavioral Activation</span>
+    <p>Exercise is framed as nervous system care in this plan, not aesthetics, because self-worth issues mean aesthetic framing backfires — it becomes another place to fail. 15 to 25 minutes of daily movement increases BDNF, regulates cortisol, and builds body trust. The goal is that your body stops feeling like something that exists for others' approval and starts feeling like something you inhabit and use.</p>
+  </div>
+
+  <div class="why-section">
+    <h3>Anti-Self-Sabotage Structure <span>Implementation Intentions</span></h3>
+    <span class="principle-tag pt-se">Self-Efficacy</span>
+    <p>Psychologist Peter Gollwitzer's research on implementation intentions shows that "if-then" planning increases follow-through significantly — not because of willpower, but because the decision is already made before the emotional pull arrives. Self-sabotage is pattern-based; it needs a pre-decided counter-pattern, not motivation in the moment.</p>
+  </div>
+</div>
+
+</main>
+
+<script>
+// NAV
+const navBtns = document.querySelectorAll('.nav-btn');
+const panels = document.querySelectorAll('.panel');
+
+navBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    navBtns.forEach(b => b.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('active');
+  });
+});
+
+// SECTION TOGGLES
+document.querySelectorAll('.section-header').forEach(header => {
+  header.addEventListener('click', () => {
+    header.parentElement.classList.toggle('open');
+  });
+});
+
+// PROGRESS per day
+function updateProgress(dayNum) {
+  const panel = document.getElementById('day' + dayNum);
+  if (!panel) return;
+  const checkboxes = panel.querySelectorAll('.task-cb');
+  const checked = panel.querySelectorAll('.task-cb:checked');
+  const pct = checkboxes.length ? Math.round((checked.length / checkboxes.length) * 100) : 0;
+  const bar = document.getElementById('prog' + dayNum);
+  const txt = panel.querySelector('.prog-text-' + dayNum);
+  if (bar) bar.style.width = pct + '%';
+  if (txt) txt.textContent = pct + '%';
+}
+
+for (let d = 1; d <= 7; d++) {
+  const panel = document.getElementById('day' + d);
+  if (panel) {
+    panel.querySelectorAll('.task-cb').forEach(cb => {
+      const key = 'cb_' + cb.id;
+      if (localStorage) {
+        try { if (localStorage.getItem(key) === '1') cb.checked = true; } catch(e){}
+      }
+      cb.addEventListener('change', () => {
+        if (localStorage) { try { localStorage.setItem(key, cb.checked ? '1' : '0'); } catch(e){} }
+        updateProgress(d);
+        buildTracker();
+      });
+    });
+    updateProgress(d);
+  }
+}
+
+// TRACKER
+const habits = [
+  'Woke at 8:30 AM',
+  'Morning journal / emotion check',
+  'Physical movement (15–20 min)',
+  'CBT thought exercise',
+  'Assertiveness act',
+  'Structured eating',
+  'Evening reflection',
+  'Phone off by midnight'
+];
+
+function buildTracker() {
+  const grid = document.getElementById('trackerGrid');
+  grid.innerHTML = '';
+  habits.forEach((habit, hi) => {
+    const card = document.createElement('div');
+    card.className = 'tracker-card';
+    const title = document.createElement('div');
+    title.className = 'tracker-card-title';
+    title.innerHTML = `<span style="font-size:0.85rem">${habit}</span>`;
+    card.appendChild(title);
+    const dots = document.createElement('div');
+    dots.className = 'tracker-dots';
+    for (let d = 1; d <= 7; d++) {
+      const dot = document.createElement('div');
+      dot.className = 'tracker-dot';
+      dot.textContent = d;
+      const key = `tracker_h${hi}_d${d}`;
+      if (localStorage) { try { if (localStorage.getItem(key) === '1') dot.classList.add('done'); } catch(e){} }
+      dot.addEventListener('click', () => {
+        dot.classList.toggle('done');
+        if (localStorage) { try { localStorage.setItem(key, dot.classList.contains('done') ? '1' : '0'); } catch(e){} }
+      });
+      dots.appendChild(dot);
+    }
+    card.appendChild(dots);
+    grid.appendChild(card);
+  });
+}
+buildTracker();
+</script>
+</body>
+</html>
